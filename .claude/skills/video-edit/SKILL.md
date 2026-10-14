@@ -130,7 +130,7 @@ Schema in the header of `scripts/finish.py`. Times are on the rough-cut timeline
 - Audio: `ffmpeg -i motion/out/final.mp4 -af ebur128 -f null -` → I ≈ -14 LUFS, no clipping.
 - Sync: spot-check that a few captions land on their words.
 
-Deliver with SendUserFile: `final.mp4`, `captions.srt`, and a short summary: what was cut and why (length before → after), the chapter list, the B-roll list with times, and what is illustrative rather than real data. Mention that `rough.mp4`, the B-roll clips and `captions.srt` are there if they want to finish in their own editor, and offer a round of changes ("zoom less", "keep the joke at 0:42", "more B-roll in the middle").
+Deliver `final.mp4` and `captions.srt` (with the environment's file-sending tool if there is one; otherwise give the paths), and a short summary: what was cut and why (length before → after), the chapter list, the B-roll list with times, and what is illustrative rather than real data. Mention that `rough.mp4`, the B-roll clips and `captions.srt` are there if they want to finish in their own editor, and offer a round of changes ("zoom less", "keep the joke at 0:42", "more B-roll in the middle").
 
 ## Honest limits
 

@@ -30,14 +30,14 @@ This skill is the playbook on top of three tool skills in this repo. Read them w
 | 8b. Deliver | `$BR/scripts/deliver.sh final_master.mp4 final.mp4` | one two-pass encode that fits ~29 MB |
 | 8. Finish | `python3 $BR/scripts/make_finish.py …` → `python3 $VE/scripts/finish.py finish.json` | `final.mp4` at -14 LUFS |
 | 9. QA | `$BR/scripts/stills.sh final.mp4 sheet.png t1 t2 …` + `ebur128` | look at every still |
-| 10. Deliver | SendUserFile `final.mp4` + `captions.srt`; commit the card source | |
+| 10. Deliver | send `final.mp4` + `captions.srt` to the user; save the card source locally | |
 
 Card steps 5 and 6-7 are independent: start the `.mov` render in the background (`render.js` takes ~1 min per 25 s) and grade/caption meanwhile.
 
 ## 0. Getting the video
 
 - **Upload in chat:** the chat upload limit is ~30 MB; long source files are bigger. Prefer Drive.
-- **Google Drive:** find the file with the Drive connector (`search_files`, e.g. `title = 'סרטון 3'` or `title contains 'Untitled_Video'`); take its `id`. The connector's own download stops at 10 MB, so download with `fetch_drive.sh`, which needs:
+- **Google Drive:** find the file with a Google Drive connector if one is connected (e.g. its file search, e.g. `title = 'סרטון 3'` or `title contains 'Untitled_Video'`); take its `id`. The connector's own download stops at 10 MB, so download with `fetch_drive.sh`, which needs:
   1. the environment's network policy to allow `drive.google.com` and `drive.usercontent.google.com` (environment settings → Network access → Custom → Allowed domains; keep the existing entries);
   2. the file shared as **"Anyone with the link"** (viewer). A private file returns a sign-in page; the script says `PRIVATE`. Sharing the whole folder by link avoids asking every time. `get_file_permissions` shows whether a file is shared.
 - Check: `ffprobe` resolution and fps (AI avatars here are 1080x1920 @ 25). Match them in every output.
@@ -122,11 +122,11 @@ Sound is sparse: one whoosh as the card enters, a short swoosh on section/tip ch
 
 - `stills.sh final.mp4 sheet.png` at one time inside every card state, plus the hook and the end. **Look at it:** face clear, captions under the chin and not touching the card, card text fits, black cards visible, nothing over the mouth.
 - `ffmpeg -i final.mp4 -af ebur128=peak=true -f null - 2>&1 | grep -E "I:|Peak:" | tail -2` → I ≈ -14 LUFS, peak below -1 dBFS.
-- Size: SendUserFile takes ~30 MB. Use `deliver.sh final_master.mp4 final.mp4` (two-pass to fit); never a second CRF re-encode.
+- Size: chat file delivery is often limited to ~30 MB. Use `deliver.sh final_master.mp4 final.mp4` (two-pass to fit); never a second CRF re-encode.
 
 ## 10. Deliver
 
-SendUserFile `final.mp4` and `captions.srt` (status normal). Commit the card source (`motion/clips/<series>/*.html`) and any script change; video files stay out of git. Reply in the user's language (Hebrew for this user) with:
+Send `final.mp4` and `captions.srt` to the user (use the environment's file-sending tool if there is one; otherwise give the file paths). Keep the card source (`motion/clips/<series>/*.html`) in the local copy; never push it to the AY source repository (see "Local learning" in CLAUDE.md). Reply in the user's language (Hebrew for this user) with:
 - length before → after;
 - the card concept and its states, in order, with the words they land on;
 - the emphasis zooms;

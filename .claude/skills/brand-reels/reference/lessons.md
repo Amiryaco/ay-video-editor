@@ -55,5 +55,5 @@
 | Final looks softer/duller than the source | constant 1.08 zoom (upscale), 4 encode generations at crf 14-23, vignette darkening the face | base zoom 1.0, lanczos, intermediates crf 8-10, no vignette, master crf 14 slow, `deliver.sh` two-pass to fit |
 
 ## Delivery
-- SendUserFile ≈ 30 MB: `deliver.sh` fits the master into ~29 MB with one two-pass encode. A 500 from the server: just retry.
-- Commit only sources (`motion/clips/**.html`, scripts, docs). `motion/v*/`, `*.mp4`, `*.mov`, `*.wav` are git-ignored.
+- Chat file delivery is often limited to ~30 MB: `deliver.sh` fits the master into ~29 MB with one two-pass encode. A 500 from the server: just retry.
+- Keep only sources in git (`motion/clips/**.html`, scripts, docs), and only in the user's own copy. `motion/v*/`, `*.mp4`, `*.mov`, `*.wav` are git-ignored.

@@ -32,4 +32,13 @@ Each business or character has a brand kit in `motion/brands.json` (colours, nic
 - **Captions default:** `--style soft --below-face <rough.mp4>`; over a light background add `--strong-shadow`. Fix names and English terms first (`--fix`). Check stills: Hebrew must read right to left, including numbers and English words.
 - **Hebrew in cards:** put `class="rtl"` on Hebrew text and mirror the layout (leading element on the right, bars filling right to left). See "Hebrew and RTL" in `motion-broll/reference/engine-api.md`.
 - **Before delivering:** stills of every card state, loudness (I ≈ -14 LUFS, peak below -1 dBFS), resolution, caption sync, no word cut mid-way. Deliver `final.mp4` and `captions.srt`; the parts (`rough.mp4`, card clips) are available for anyone who wants to finish in their own editor.
-- This repository is the shared source. Don't commit or push the user's videos or personal brand files; video files are git-ignored.
+- Video files are git-ignored; never put the user's videos in git.
+
+## Local learning (each copy learns on its own)
+
+This repository is the shared source published by AY Digital Marketing. Each user's copy adapts to that user, and nothing flows back to the source.
+
+- **Never push to the source.** If `git remote get-url origin` points to `github.com/Amiryaco/ay-video-editor`, do not push, open pull requests, or change that remote. The user doesn't own it, and their videos, brand and notes stay on their side. Local commits are fine. Push only if the user explicitly asks and `origin` is a repository they own.
+- **No automatic updates.** Don't run `git pull` or update the skills from the source unless the user explicitly asks for an update. Before an update they asked for, keep their local changes (commit or stash them first) and tell them what changed.
+- **Remember what the user teaches you.** At the start of every session, read `motion/my-notes.md` if it exists. When the user corrects or confirms something that should hold for future videos (caption look, zoom amount, card style, pacing, words to spell a certain way, their CTA), add one short dated line to `motion/my-notes.md` (create it if missing). Keep brand colours and the business name in `motion/brands.json`. Their notes override the defaults in this file and in the skills.
+- Improve the user's local copy of the skills only when they ask, and say which file changed.
